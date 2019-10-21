@@ -34,6 +34,13 @@ public class AnswerDao {
         return findById(keyHolder.getId());
     }
 
+    public boolean delete(long answerId) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        String sql = "DELETE FROM ANSWERS WHERE answerId=?";
+        jdbcTemplate.update(sql, answerId);
+        return findById(answerId) == null;
+    }
+
     public Answer findById(long answerId) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         String sql = "SELECT answerId, writer, contents, createdDate, questionId FROM ANSWERS WHERE answerId = ?";
@@ -64,4 +71,6 @@ public class AnswerDao {
 
         return jdbcTemplate.query(sql, rm, questionId);
     }
+
+
 }
