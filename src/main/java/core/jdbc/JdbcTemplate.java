@@ -40,6 +40,7 @@ public class JdbcTemplate  {
             while (rs.next()) {
                 results.add(rowMapper.mapRow(rs));
             }
+            rs.close();
             return results;
         } catch (SQLException e) {
             throw new DataAccessException(e.getMessage());

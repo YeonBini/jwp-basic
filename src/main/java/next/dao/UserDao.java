@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDao {
-    private final Logger log = LoggerFactory.getLogger(UserDao.class);
+//    private final Logger log = LoggerFactory.getLogger(UserDao.class);
 
     public void insert(User user) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();

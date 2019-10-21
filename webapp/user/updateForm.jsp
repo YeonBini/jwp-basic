@@ -11,7 +11,7 @@
 
 <div class="container" id="main">
     <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default content-main">
+        <div class="panel panel-default contents-main">
             <form name="question" method="post" action="/users/update">
                 <input type="hidden" name="userId" value="${user.userId}" />
                 <div class="form-group">
