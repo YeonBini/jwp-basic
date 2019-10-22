@@ -1,14 +1,11 @@
 package next.controller;
 
+import core.mvc.AbstractController;
+import core.mvc.ModelAndView;
+import next.dao.QuestionDao;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import core.mvc.AbstractController;
-import core.mvc.Controller;
-import core.mvc.ModelAndView;
-import core.mvc.View;
-import next.dao.QuestionDao;
-import next.view.JspView;
 
 public class HomeController extends AbstractController {
     @Override
