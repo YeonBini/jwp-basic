@@ -1,4 +1,4 @@
-$(".answerWrite input[type=submit]").click(addAnswer)
+$(".answerWrite input[type=submit]").click(addAnswer);
 
 function addAnswer(e) {
   e.preventDefault();
@@ -16,11 +16,11 @@ function addAnswer(e) {
 }
 
 function onSuccess(json, status){
-  console.log(json)
   var answer = json.answer;
   var answerTemplate = $("#answerTemplate").html();
   var template = answerTemplate.format(answer.writer, new Date(answer.createdDate), answer.contents, answer.answerId, answer.answerId);
   $(".qna-comment-slipp-articles").prepend(template);
+  $(".qna-comment-count").html("<strong>" + json.question.countOfComment +"</strong>개의 의견")
 }
 
 function onError(xhr, status) {
@@ -45,12 +45,12 @@ function deleteAnswer(e) {
       alert("error");
     },
     success : function (json, status) {
-      // console.log("json.result : " +json.result)
       var result = json.answer;
-      console.log(result)
       if(result.status) {
         deleteBtn.closest('article').remove()
       }
+
+      $(".qna-comment-count").html("<strong>" + json.question.countOfComment +"</strong>개의 의견")
     }
   })
 

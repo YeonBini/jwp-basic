@@ -9,7 +9,15 @@
 </head>
 <body>
 <%@ include file="/include/navigation.jspf" %>
-
+<script>
+	console.log(${sessionScope.notLogined});
+</script>
+<c:if test="${sessionScope.notLogined}">
+	${sessionScope.notLogined = false}
+	<script>
+		alert("Please login before you do something wrong");
+	</script>
+</c:if>
 <div class="container" id="main">
 	<div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
 		<div class="panel panel-default qna-list">
@@ -49,7 +57,8 @@
 					</ul>
 				</div>
 				<div class="col-md-3 qna-write">
-					<a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
+					<a href="/qna/form?name=${sessionScope.user.userId}" class="btn btn-primary pull-right add-question" role="button">질문하기</a>
+<%--					<button class="btn btn-primary pull-right add-question" role="button">질문하기</button>--%>
 				</div>
 			</div>
 		</div>

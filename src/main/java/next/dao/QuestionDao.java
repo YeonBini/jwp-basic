@@ -32,6 +32,21 @@ public class QuestionDao {
         return findById(keyHolder.getId());
     }
 
+    public Question update(Question question) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        String sql = "UPDATE QUESTIONS" +
+                " SET writer=?, title=?, contents=?, countOfAnswer=? " +
+                " WHERE questionId=?";
+        jdbcTemplate.update(sql,
+                question.getWriter(),
+                question.getTitle(),
+                question.getContents(),
+                question.getCountOfComment(),
+                question.getQuestionId());
+
+        return findById(question.getQuestionId());
+    }
+
     public List<Question> findAll() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         String sql = "SELECT questionId, writer, title, createdDate, countOfAnswer FROM QUESTIONS "

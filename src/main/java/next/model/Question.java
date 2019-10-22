@@ -57,6 +57,16 @@ public class Question {
         return countOfComment;
     }
 
+    public int addCountofComment() {
+        this.countOfComment = countOfComment + 1;
+        return this.countOfComment;
+    }
+
+    public int subtractCountofComment() {
+        this.countOfComment = countOfComment - 1;
+        return this.countOfComment;
+    }
+
     @Override
     public String toString() {
         return "Question [questionId=" + questionId + ", writer=" + writer + ", title=" + title + ", contents="

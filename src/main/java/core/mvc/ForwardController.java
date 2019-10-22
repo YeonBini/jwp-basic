@@ -1,5 +1,6 @@
 package core.mvc;
 
+import next.controller.UserSessionUtils;
 import next.view.JspView;
 
 import javax.servlet.http.HttpServletRequest;

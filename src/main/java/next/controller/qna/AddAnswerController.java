@@ -5,7 +5,9 @@ import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import core.mvc.View;
 import next.dao.AnswerDao;
+import next.dao.QuestionDao;
 import next.model.Answer;
+import next.model.Question;
 import next.model.Result;
 import next.view.JsonView;
 import org.slf4j.Logger;
@@ -27,6 +29,12 @@ public class AddAnswerController extends AbstractController {
         );
         log.debug("answer : {}", answer);
         Answer savedAnswer = answerDao.insert(answer);
-        return jsonView().addObject("answer", savedAnswer);
+
+        QuestionDao questionDao = new QuestionDao();
+        Question question = questionDao.findById(Long.parseLong(req.getParameter("questionId")));
+        question.addCountofComment();
+        questionDao.update(question);
+
+        return jsonView().addObject("answer", savedAnswer).addObject("question", question);
     }
 }

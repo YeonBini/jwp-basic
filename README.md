@@ -57,3 +57,5 @@ contextInitailized()를 호출하여 초기화 작업을 진행한다.
 5. service() 메소드는 반환받은 ModelAndView의 모델 데이터를 뷰의 render() 메소드에 전달한다. 
  이 요청에서 View는 JspView이다. JspView는 render() 메소드로 전달된 모델 데이터를 home.jsp에 전달해 html을 생성하고, 응답한다. 
  
+ ### 7번 문제 : ShowController는 멀티스레드 상황에서 문제가 발생할 가능성이 있는 코드이다. 멀티스레드 상황에서 문제가 발생하지 않도록 수정한다. 
+ 

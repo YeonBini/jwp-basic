@@ -29,6 +29,8 @@ public class AnswerDao {
             }
         };
 
+        String sqlForCountOfComment = "UPDATE QUESTIONS SET countOfAnswer = countOfAnswer + ? WHERE questionId = ?";
+
         KeyHolder keyHolder = new KeyHolder();
         jdbcTemplate.update(psc, keyHolder);
         return findById(keyHolder.getId());
