@@ -76,4 +76,12 @@ public class QuestionDao {
 
         return jdbcTemplate.queryForObject(sql, rm, questionId);
     }
+
+    public boolean deleteQuestion(long questionId) {
+        String sql = "DELETE FROM QUESTIONS " +
+                     "WHERE questionId=?";
+        jdbcTemplate.update(sql, questionId);
+
+        return findById(questionId) == null;
+    }
 }
