@@ -1,9 +1,31 @@
+// $("#update-question").on('click', updateQuestion);
+//
+// function updateQuestion(e) {
+//   e.preventDefault();
+//
+//   var url = $("#update-question")[0].href;
+//   console.log(url)
+//
+//   $.ajax({
+//     type: 'get',
+//     url: url,
+//     success : function (json, status) {
+//       alert(json.message);
+//     },
+//     error : function (xhr, status) {
+//       alert("error!");
+//     }
+//   })
+// }
+
+
 $(".answerWrite input[type=submit]").click(addAnswer);
 
 function addAnswer(e) {
   e.preventDefault();
 
   var queryString = $("form[name=answer]").serialize();
+  console.log(queryString);
 
   $.ajax({
     type : 'post',

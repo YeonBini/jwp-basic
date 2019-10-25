@@ -23,8 +23,8 @@
 							<img src="https://graph.facebook.com/v2.3/100000059371774/picture" class="article-author-thumb" alt="">
 						</div>
 						<div class="article-header-text">
-							<a href="/users/92/kimmunsu" class="article-author-name">${question.writer}</a>
-							<a href="/questions/413" class="article-header-time" title="퍼머링크">
+							<a href="#" class="article-author-name">${question.writer}</a>
+							<a href="#" class="article-header-time" title="퍼머링크">
 								<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${question.createdDate}" />
 								<i class="icon-link"></i>
 							</a>
@@ -36,7 +36,7 @@
 					<div class="article-util">
 						<ul class="article-util-list">
 							<li>
-								<a class="link-modify-article" href="#">수정</a>
+								<a class="link-modify-article" id="update-question" href="/qna/update?questionId=${question.questionId}">수정</a>
 							</li>
 							<li>
 								<form class="form-delete" action="#" method="POST">
@@ -73,7 +73,7 @@
 								<div class="article-util">
 									<ul class="article-util-list">
 										<li>
-											<a class="link-modify-article" href="/api/qna/updateAnswer?answerId=${each.answerId}">수정</a>
+											<a class="link-modify-article" href="#">수정</a>
 										</li>
 										<li>
 											<form class="form-delete" action="/api/qna/deleteAnswer" method="POST">

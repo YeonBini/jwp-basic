@@ -57,7 +57,7 @@
 					</ul>
 				</div>
 				<div class="col-md-3 qna-write">
-					<a href="/qna/form?name=${sessionScope.user.userId}" class="btn btn-primary pull-right add-question" role="button">질문하기</a>
+					<a href="/qna/form" class="btn btn-primary pull-right add-question" role="button">질문하기</a>
 <%--					<button class="btn btn-primary pull-right add-question" role="button">질문하기</button>--%>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ CREATE TABLE USERS (
 	PRIMARY KEY               (userId)
 );
 
-INSERT INTO USERS VALUES('admin', 'password', '자바지기', 'admin@slipp.net');
+INSERT INTO USERS VALUES('111', '111', '연빈', 'yeobn88@gmail.com');
 
 DROP TABLE IF EXISTS QUESTIONS;
 
@@ -100,7 +100,7 @@ INSERT INTO ANSWERS (writer, contents, createdDate, questionId) VALUES
 CURRENT_TIMESTAMP(), 7);
 
 INSERT INTO QUESTIONS (questionId, writer, title, contents, createdDate, countOfAnswer) VALUES
-(8, '자바지기',
+(8, '연빈',
 'anonymous inner class는 final 변수에만 접근해야 하는 이유는?', 
 '오늘 자바 8에 추가된 람다와 관련한 내용을 읽다가 다음과 같이 내용이 있어 궁금증이 생겼다.
 람다 표현식에서 변수를 변경하는 작업은 스레드에 안전하지 않다. - 가장 빨리 만나는 자바8 28페이지...
