@@ -8,8 +8,6 @@ import next.dao.AnswerDao;
 import next.dao.QuestionDao;
 import next.model.Answer;
 import next.model.Question;
-import next.model.Result;
-import next.view.JsonView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
