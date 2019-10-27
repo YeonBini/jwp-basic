@@ -1,17 +1,16 @@
 package next.controller;
 
-import core.db.DataBase;
+import core.mvc.AbstractController;
+import core.mvc.ModelAndView;
+import next.dao.QuestionDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class HomeController implements Controller {
-    private static final long serialVersionUID = 1L;
-
+public class HomeController extends AbstractController {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        req.setAttribute("users", DataBase.findAll());
-        return "home.jsp";
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        QuestionDao questionDao = new QuestionDao();
+        return jspView("home.jsp").addObject("questions", questionDao.findAll());
     }
 }
