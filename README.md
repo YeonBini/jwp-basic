@@ -4,7 +4,7 @@
 
 톰캣은 Servelt Container의 역할을 담당
 1. 톰캣에서 웹 애플리케이션을 인식할 때 @WebServlet 어노테이션 중 loadOnStartUp 조건에 해당하는 
-Servlet은 해당 시점에 미리 초기화 작업을 실행한다. 
+Servlet은 해당 시점에 미리 초기화 작업을 실행한다. (StandarContext 확인 필요 )
     - 이유 : 보통의 서블릿은 인식 시점에 Thread를 생성하여 초기화 작업을 진행하지만, 
     이는 초기화에 시간이 소요되기 때문에 DispatcherServlet의 경우 톰캣의 인식 시점에 초기화를 할 수 있도록 설정한다. 
     - loadOnStartUp 조건에서 0에 가까운 양수일 수록 먼저 초기화 실행이 되며, 
