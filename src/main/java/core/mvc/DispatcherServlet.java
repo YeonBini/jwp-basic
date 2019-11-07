@@ -1,6 +1,7 @@
 package core.mvc;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import core.nmvc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +19,25 @@ public class DispatcherServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
-    private RequestMapping rm;
+    private LegacyHandlerMapping lhm;
+    private AnnotationHandlerMapping ahm;
+
+    private List<HandlerMapping> handlerMappings = Lists.newArrayList();
+    private List<HandlerAdapter> handlerAdapters = Lists.newArrayList();
 
     @Override
     public void init() throws ServletException {
-        rm = new RequestMapping();
-        rm.initMapping();
+        lhm = new LegacyHandlerMapping();
+        ahm = new AnnotationHandlerMapping();
+
+        lhm.initMapping();
+        ahm.initialize();
+
+        handlerMappings.add(lhm);
+        handlerMappings.add(ahm);
+
+        handlerAdapters.add(new ControllerHandlerAdapter());
+        handlerAdapters.add(new AnnotationHandlerAdapter());
     }
 
     @Override
@@ -29,15 +45,36 @@ public class DispatcherServlet extends HttpServlet {
         String requestUri = req.getRequestURI();
         logger.debug("Method : {}, Request URI : {}", req.getMethod(), requestUri);
 
-        Controller controller = rm.findController(req.getRequestURI());
-        ModelAndView mav;
+        Object handler = getHandler(req);
+
+        if(handler == null) {
+            throw new IllegalArgumentException("존재하지 않는 url 입니다.");
+        }
         try {
-            mav = controller.execute(req, resp);
+            ModelAndView mav = execute(handler, req, resp);
             View view = mav.getView();
             view.render(mav.getModel(), req, resp);
         } catch (Throwable e) {
             logger.error("Exception : {}", e);
             throw new ServletException(e.getMessage());
         }
+    }
+
+    private ModelAndView execute(Object handler, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        for(HandlerAdapter handlerAdapter : handlerAdapters) {
+            if(handlerAdapter.support(handler)) {
+                return handlerAdapter.handle(req, resp, handler);
+            }
+        }
+        return null;
+    }
+
+    private Object getHandler(HttpServletRequest req) {
+        Object handler;
+        for(HandlerMapping hd :handlerMappings) {
+            handler = hd.getHandler(req);
+            if(handler != null) return handler;
+        }
+        return null;
     }
 }

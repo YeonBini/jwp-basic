@@ -3,6 +3,7 @@ package core.mvc;
 import java.util.HashMap;
 import java.util.Map;
 
+import core.nmvc.HandlerMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +26,9 @@ import next.controller.user.ProfileController;
 import next.controller.user.UpdateFormUserController;
 import next.controller.user.UpdateUserController;
 
-public class RequestMapping {
+import javax.servlet.http.HttpServletRequest;
+
+public class LegacyHandlerMapping implements HandlerMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     private Map<String, Controller> mappings = new HashMap<>();
 
@@ -33,7 +36,7 @@ public class RequestMapping {
         mappings.put("/", new HomeController());
         mappings.put("/users/form", new ForwardController("/user/form.jsp"));
         mappings.put("/users/loginForm", new ForwardController("/user/login.jsp"));
-        mappings.put("/users", new ListUserController());
+//        mappings.put("/users", new ListUserController());
         mappings.put("/users/login", new LoginController());
         mappings.put("/users/profile", new ProfileController());
         mappings.put("/users/logout", new LogoutController());
@@ -60,5 +63,10 @@ public class RequestMapping {
 
     void put(String url, Controller controller) {
         mappings.put(url, controller);
+    }
+
+    @Override
+    public Object getHandler(HttpServletRequest request) {
+        return mappings.get(request.getRequestURI());
     }
 }
